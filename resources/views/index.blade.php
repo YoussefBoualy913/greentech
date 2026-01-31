@@ -57,13 +57,8 @@
 
                 <!-- Search & Cart -->
                 <div class="flex items-center gap-4">
-                     <div class="relative hidden sm:block">
-                        <input type="text" placeholder="Rechercher une plante..." class="pl-10 pr-4 py-2 border border-gray-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent w-64 transition-all">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                    </div>
-                    <a href="admin-login.html" class="text-sm font-medium text-slate-500 hover:text-brand-600 flex items-center gap-1">
+                    
+                    <a href="{{route('products.index')}}" class="text-sm font-medium text-slate-500 hover:text-brand-600 flex items-center gap-1">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                         </svg>
@@ -133,6 +128,17 @@
             <section class="flex-1">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-2xl font-bold text-slate-900">Nos Produits</h2>
+                     <div class="relative hidden sm:block">
+                        <input type="text" placeholder="Rechercher une plante..." class="pl-10 pr-4 py-2 border border-gray-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent w-64 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                        <a href=""
+                           class="bg-brand-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brand-700 transition-colors flex items-center gap-2">
+
+                           Rechercher
+                        </a>
                     <select class="border-gray-200 border rounded-lg px-3 py-2 text-sm focus:ring-brand-500 focus:border-brand-500">
                         <option>Trier par popularité</option>
                         <option>Prix croissant</option>

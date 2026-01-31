@@ -54,7 +54,7 @@
         </nav>
 
         <div class="p-4 border-t border-slate-800">
-            <a href="index.html"
+            <a href="{{route('products.home')}}"
                 class="flex items-center px-4 py-2 text-slate-400 rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-5 h-5 mr-3">
@@ -138,10 +138,14 @@
                             <td class="px-6 py-4">
                                 <span class="text-slate-600">{{$product->stock}}</span>
                             </td>
-                            <td class="px-6 py-4 text-right space-x-2">
-                                <a href="admin-product-form.html"
+                            <td class="px-6 py-4 text-right flex space-x-2">
+                                <a href="{{route('products.edit',$product->id)}}"
                                 class="text-amber-700 hover:text-brand-800 font-medium text-sm">Éditer</a>
-                                <button class="text-red-500 hover:text-red-700 font-medium text-sm">Supprimer</button>
+                                <form action="{{route('products.destroy',$product->id)}}" method="POST"  onsubmit="return confirm('Supprimer ce produit ?')">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit" class="text-red-500 hover:text-red-700 font-medium text-sm">Supprimer</button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach

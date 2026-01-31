@@ -1,40 +1,12 @@
-<!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monstera Deliciosa - GreenTech Solutions</title>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            50: '#ecfdf5',
-                            100: '#d1fae5',
-                            500: '#10b981',
-                            600: '#059669',
-                            700: '#047857',
-                            900: '#064e3b',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-</head>
+@section('title','Administration - GreenTech Solution')
+    
+@section('body-class','bg-gray-50 text-slate-800 font-sans antialiased')
+    
 
-<body class="bg-gray-50 text-slate-800 font-sans antialiased">
+@section('content')
+
 
     <!-- Navigation -->
     <nav class="bg-white sticky top-0 z-50 border-b border-gray-100 shadow-sm">
@@ -101,7 +73,7 @@
                                     stroke-width="2" d="m1 9 4-4-4-4" />
                             </svg>
                             <a href="#"
-                                class="ml-1 text-sm font-medium text-gray-700 hover:text-brand-600 md:ml-2">Plantes</a>
+                                class="ml-1 text-sm font-medium text-gray-700 hover:text-brand-600 md:ml-2">{{$product->category->name}}</a>
                         </div>
                     </li>
                     <li aria-current="page">
@@ -111,7 +83,7 @@
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="2" d="m1 9 4-4-4-4" />
                             </svg>
-                            <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2">Monstera Deliciosa</span>
+                            <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2">{{$product->name}}</span>
                         </div>
                     </li>
                 </ol>
@@ -126,12 +98,12 @@
 
                 <!-- Product Image -->
                 <div class="relative bg-gray-100 h-96 lg:h-auto">
-                    <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-                        alt="Monstera Deliciosa" class="w-full h-full object-cover">
+                    <img src="{{$product->category->image_url}}"
+                        alt="{{$product->name}}" class="w-full h-full object-cover">
                     <div class="absolute top-4 left-4">
                         <span
                             class="bg-white/90 backdrop-blur text-sm font-bold px-3 py-1.5 rounded-full text-slate-800 shadow-sm">
-                            Plantes
+                            {{$product->category->name}}
                         </span>
                     </div>
                 </div>
@@ -142,25 +114,20 @@
                         <span
                             class="bg-green-100 text-green-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-green-200">En
                             stock</span>
-                        <span class="text-sm text-gray-500">Ref: PL-001</span>
+                        <span class="text-sm text-gray-500">{{$product->stock}}</span>
                     </div>
 
-                    <h1 class="text-3xl lg:text-4xl font-extrabold text-slate-900 mb-4">Monstera Deliciosa</h1>
+                    <h1 class="text-3xl lg:text-4xl font-extrabold text-slate-900 mb-4">{{$product->name}}</h1>
 
                     <div class="mb-6">
-                        <p class="text-3xl font-bold text-brand-600">29.99 €</p>
+                        <p class="text-3xl font-bold text-brand-600">{{$product->price}}€</p>
                     </div>
 
                     <div class="prose prose-slate mb-8">
                         <p class="text-slate-600 leading-relaxed">
-                            La Monstera Deliciosa, aussi connue sous le nom de "Faux Philodendron", est une plante
-                            d'intérieur incontournable. Elle est célèbre pour ses grandes feuilles vernissées et
-                            perforées qui apportent une touche tropicale immédiate à n'importe quel intérieur.
+                           {{$product->description}}
                         </p>
-                        <p class="text-slate-600 leading-relaxed mt-4">
-                            Facile d'entretien, elle apprécie une lumière vive sans soleil direct et un arrosage modéré.
-                            Parfaite pour les débutants comme pour les experts en jardinage.
-                        </p>
+                        
                     </div>
 
                     <div class="border-t border-gray-100 pt-8 mt-auto">
@@ -247,6 +214,4 @@
         </div>
     </footer>
 
-</body>
-
-</html>
+@endsection

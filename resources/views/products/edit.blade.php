@@ -1,13 +1,12 @@
+
 @extends('layouts.app')
 
-@section('title','Ajouter un Produit - Administration')
+@section('title','Modifier un Produit - Administration')
     
 @section('body-class','bg-gray-50 font-sans antialiased flex h-screen overflow-hidden')
     
 
 @section('content')
-
-
     <!-- Sidebar -->
     <aside class="w-64 bg-slate-900 border-r border-slate-800 hidden lg:flex flex-col">
         <div class="h-16 flex items-center px-6 border-b border-slate-800">
@@ -61,28 +60,32 @@
         <div class="flex-1 overflow-auto p-8">
             <div class="max-w-3xl mx-auto">
 
-                <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data"
+                <form action="{{route('products.update',$product->id)}}" method="POST" enctype="multipart/form-data"
                     class="bg-white p-8 rounded-xl border border-gray-100 shadow-sm space-y-6">
                 @csrf
+                @method('PUT')
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="col-span-1 md:col-span-2">
                             <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Nom du
                                 produit</label>
-                            <input type="text" id="name" name="name"
+                            <input type="text" id="name" name="name" value="{{$product->name}}"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all placeholder-gray-400"
                                 placeholder="Ex: Monstera Deliciosa">
+                            @error('name')
+                            <p class="text-red-500">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div>
                             <label for="price" class="block text-sm font-medium text-slate-700 mb-1">Prix (€)</label>
-                            <input type="number" step="0.01" id="price" name="price"
+                            <input type="number" step="0.01" id="price" name="price" value="{{$product->price}}"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all placeholder-gray-400"
                                 placeholder="0.00">
                         </div>
 
                         <div>
                             <label for="stock" class="block text-sm font-medium text-slate-700 mb-1">Stock</label>
-                            <input type="number" id="stock" name="stock"
+                            <input type="number" id="stock" name="stock" value="{{$product->stock}}"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all placeholder-gray-400"
                                 placeholder="0">
                         </div>
@@ -90,13 +93,16 @@
                         <div class="col-span-1 md:col-span-2">
                             <label for="category"
                                 class="block text-sm font-medium text-slate-700 mb-1">Catégorie</label>
-                            <select id="category" name="categoryname"
+                            <select id="category" name="categoryname" 
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all bg-white">
                                 <option value="" disabled selected>Choisir une catégorie</option>
                                 <option value="Plantes">Plantes</option>
                                 <option value="Graines">Graines</option>
                                 <option value="Gutils">Outils</option>
                             </select>
+                             @error('categoryname')
+                            <p class="text-red-500">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div class="col-span-1 md:col-span-2">
@@ -104,7 +110,7 @@
                                 class="block text-sm font-medium text-slate-700 mb-1">Description</label>
                             <textarea id="description" name="description" rows="4"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all placeholder-gray-400"
-                                placeholder="Description détaillée du produit..."></textarea>
+                                placeholder="Description détaillée du produit...">{{old('description',$product->description ?? '')}}</textarea>
                         </div>
 
                         <div class="col-span-1 md:col-span-2">

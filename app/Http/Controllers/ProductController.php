@@ -51,7 +51,7 @@ class ProductController extends Controller
         $validated['image_url'] = '/storage/'.$path;
     }
     $category = Category::where('name',$validated['categoryname'])->first();
-    $category_id = $category->id;
+ 
     $product = Product::create([
         'name'        => $validated['name'],
         'description' => $validated['description'],
@@ -69,7 +69,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return view('products/show',compact('product'));
     }
 
     /**
@@ -77,7 +77,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+         return view('products/edit',compact('product'));
     }
 
     /**
@@ -85,14 +85,30 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+         $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'stock' => 'required|integer|min:0',
+        'price' => 'required|numeric|min:0',
+        'categoryname' => 'required|string|exists:categories,name'
+    ]);
+     $category = Category::where('name',$validated['categoryname'])->first();
+     $product->update([
+        'name'        => $validated['name'],
+        'description' => $validated['description'],
+        'stock'       => $validated['stock'],
+        'price'       => $validated['price'],
+        'category_id' => $category->id,    ]);
+    return redirect()->route('products.index')->with('success','Produit modifier avec succès !');
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Product $product)
-    {
-        //
+    { 
+        $product->delete();
+        return redirect()->route('products.index');
     }
 }
