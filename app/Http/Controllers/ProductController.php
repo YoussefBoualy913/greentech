@@ -15,9 +15,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with('category')->get();
+        $products = Product::with('category')->latest()->paginate(3);
        
-        return view('products/index',compact('products'));
+        return view('products.index',compact('products'));
 
         }
         
@@ -26,7 +26,7 @@ class ProductController extends Controller
         */
         public function create()
         {
-        return view('products/create');
+        return view('products.create');
         
     }
 
@@ -69,7 +69,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view('products/show',compact('product'));
+        return view('products.show',compact('product'));
     }
 
     /**
@@ -77,7 +77,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-         return view('products/edit',compact('product'));
+         return view('products.edit',compact('product'));
     }
 
     /**

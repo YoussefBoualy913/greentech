@@ -208,12 +208,22 @@
                     </tbody>
                 </table>
                 <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between">
-                    <span class="text-sm text-slate-500">Affichage de 1 à 3 sur 25 produits</span>
+                    <span class="text-sm text-slate-500">Affichage de {{ $products->currentPage() }} sur {{ $products->lastPage() }} page </span>
+                    <span class="text-sm text-slate-500">Total  {{ $products->total() }} produits</span>
                     <div class="flex gap-1">
-                        <button class="px-3 py-1 border border-gray-200 rounded text-sm disabled:opacity-50"
+                         @if ($products->onFirstPage())
+                        <button  class="px-3 py-1 border border-gray-200 rounded text-sm disabled:opacity-50"
                             disabled>Précédent</button>
-                        <button
-                            class="px-3 py-1 border border-gray-200 rounded text-sm hover:bg-gray-50">Suivant</button>
+                        @else
+                         <a href="{{ $products->previousPageUrl() }}" class="px-3 py-1 border border-gray-200 rounded text-sm "
+                            >Précédent</a>
+                        @endif
+                        @if($products->hasMorePages())
+                        <a href="{{ $products->nextPageUrl() }}" class="px-3 py-1 border border-gray-200 rounded text-sm hover:bg-gray-50">Suivant</a>
+                        @else
+                        <button  class="px-3 py-1 border border-gray-200 rounded text-sm disabled:opacity-50"
+                            disabled>Suivant</button>
+                        @endif
                     </div>
                 </div>
             </div>
