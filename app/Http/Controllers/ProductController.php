@@ -6,19 +6,17 @@ use App\Models\Product;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreproductRequest;
 use App\Http\Requests\updateproductRequest;
-use App\Models\Category;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use App\service\ProductService;
+
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(ProductService $service)
     {
-        $products = Product::with('category')->latest()->paginate(3);
-       
+       $products = $service->index();
         return view('products.index',compact('products'));
 
         }
@@ -35,26 +33,9 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreproductRequest $request)
+    public function store(StoreproductRequest $request ,ProductService $service)
     {
-        $validated = $request->validated();
-    
-    if ($request->hasFile('image')) {
-        $file = $request->file('image');
-        $filename = time().'_'.Str::slug($request->name).'.'.$file->getClientOriginalExtension();
-        $path = $file->storeAs('products', $filename, 'public');
-        $validated['image_url'] = '/storage/'.$path;
-    }
-    $category = Category::where('name',$validated['categoryname'])->first();
- 
-    $product = Product::create([
-        'name'        => $validated['name'],
-        'description' => $validated['description'],
-        'image_url'   => $validated['image_url'],
-        'stock'       => $validated['stock'],
-        'price'       => $validated['price'],
-        'category_id' => $category->id,    ]);
-
+       $service->store($request);
     return redirect()->route('products.index')->with('success','Produit créé avec succès !');
 
     }
@@ -78,25 +59,18 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(updateproductRequest $request, Product $product)
+    public function update(updateproductRequest $request, Product $product,ProductService $service)
     {
-         $validated = $request->validated();
-     $category = Category::where('name',$validated['categoryname'])->first();
-     $product->update([
-        'name'        => $validated['name'],
-        'description' => $validated['description'],
-        'stock'       => $validated['stock'],
-        'price'       => $validated['price'],
-        'category_id' => $category->id,    ]);
+      $service->update($request,$product);
     return redirect()->route('products.index')->with('success','Produit modifier avec succès !');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy(Product $product,ProductService $service)
     { 
-        $product->delete();
+        $service-> delete($product);
         return redirect()->route('products.index');
     }
 }
