@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreproductRequest;
+use App\Http\Requests\updateproductRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -33,16 +35,9 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreproductRequest $request)
     {
-        $validated = $request->validate([
-        'name' => 'required|string|max:255',
-        'description' => 'nullable|string',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'stock' => 'required|integer|min:0',
-        'price' => 'required|numeric|min:0',
-        'categoryname' => 'required|string|exists:categories,name'
-    ]);
+        $validated = $request->validated();
     
     if ($request->hasFile('image')) {
         $file = $request->file('image');
@@ -83,16 +78,9 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(updateproductRequest $request, Product $product)
     {
-         $validated = $request->validate([
-        'name' => 'required|string|max:255',
-        'description' => 'nullable|string',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'stock' => 'required|integer|min:0',
-        'price' => 'required|numeric|min:0',
-        'categoryname' => 'required|string|exists:categories,name'
-    ]);
+         $validated = $request->validated();
      $category = Category::where('name',$validated['categoryname'])->first();
      $product->update([
         'name'        => $validated['name'],
