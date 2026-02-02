@@ -21,4 +21,5 @@ class VisiteurController extends Controller
            return view('visiteur.index',compact('products'));
       }
     }
+
 }

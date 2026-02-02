@@ -14,3 +14,4 @@ Route::get('edit/{product}',[ProductController::class,'edit'])->name('products.e
 Route::put('update/{product}',[ProductController::class,'update'])->name('products.update');
 Route::delete('destroy/{product}',[ProductController::class,'destroy'])->name('products.destroy');
 Route::get('show/{product}',[ProductController::class,'show'])->name('products.show');
+Route::get('login',[VisiteurController::class,'login'])->name('login');
