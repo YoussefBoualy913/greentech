@@ -98,7 +98,7 @@
 
                 <!-- Product Image -->
                 <div class="relative bg-gray-100 h-96 lg:h-auto">
-                    <img src="{{$product->category->image_url}}"
+                    <img src="{{$product->image_url}}"
                         alt="{{$product->name}}" class="w-full h-full object-cover">
                     <div class="absolute top-4 left-4">
                         <span

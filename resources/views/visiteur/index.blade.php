@@ -128,17 +128,20 @@
             <section class="flex-1">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-2xl font-bold text-slate-900">Nos Produits</h2>
+                    <form action="{{ route('visiteur.index') }}" method="GET" class="flex justify-between gap-3">
                      <div class="relative hidden sm:block">
-                        <input type="text" placeholder="Rechercher une plante..." class="pl-10 pr-4 py-2 border border-gray-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent w-64 transition-all">
+                        <input type="text" name="search" placeholder="Rechercher une plante..." class="pl-10 pr-4 py-2 border border-gray-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent w-64 transition-all">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                     </div>
-                        <a href=""
+                        <button 
                            class="bg-brand-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brand-700 transition-colors flex items-center gap-2">
 
                            Rechercher
-                        </a>
+                        </button>
+                    </form>
+
                     <select class="border-gray-200 border rounded-lg px-3 py-2 text-sm focus:ring-brand-500 focus:border-brand-500">
                         <option>Trier par popularité</option>
                         <option>Prix croissant</option>
@@ -149,17 +152,19 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     
                     <!-- Product Card 1 -->
+                    @foreach ($products as $product )
+                        
                     <div class="group bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col">
                         <div class="relative h-64 overflow-hidden bg-gray-100">
-                            <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-xs font-bold px-2 py-1 rounded text-slate-700 shadow-sm z-10">Plantes</span>
-                            <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Monstera Deliciosa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-xs font-bold px-2 py-1 rounded text-slate-700 shadow-sm z-10">{{$product->category->name}}</span>
+                            <img src="{{$product->image_url}}" alt="{{$product->name}}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         </div>
                         <div class="p-5 flex-1 flex flex-col">
-                            <h3 class="font-bold text-lg text-slate-900 mb-1">Monstera Deliciosa</h3>
-                            <p class="text-sm text-slate-500 line-clamp-2 mb-4">Une plante d'intérieur emblématique avec de grandes feuilles perforées.</p>
+                            <h3 class="font-bold text-lg text-slate-900 mb-1">{{$product->name}}</h3>
+                            <p class="text-sm text-slate-500 line-clamp-2 mb-4">{{$product->discription}}</p>
                             <div class="mt-auto flex items-center justify-between">
-                                <span class="text-xl font-bold text-brand-600">29.99 €</span>
-                                <a href="product-details.html" class="inline-flex items-center justify-center p-2 rounded-lg bg-brand-50 text-brand-600 hover:bg-brand-600 hover:text-white transition-colors">
+                                <span class="text-xl font-bold text-brand-600">{{$product->price}} €</span>
+                                <a href="{{route('products.show',$product->id) }}" class="inline-flex items-center justify-center p-2 rounded-lg bg-brand-50 text-brand-600 hover:bg-brand-600 hover:text-white transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-5">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
                                     </svg>
@@ -167,9 +172,10 @@
                             </div>
                         </div>
                     </div>
+                    @endforeach
 
                     <!-- Product Card 2 -->
-                    <div class="group bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col">
+                    {{-- <div class="group bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col">
                         <div class="relative h-64 overflow-hidden bg-gray-100">
                             <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-xs font-bold px-2 py-1 rounded text-slate-700 shadow-sm z-10">Outils</span>
                             <img src="https://images.unsplash.com/photo-1598282361138-b6ec72b4f2c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sécateur Pro" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -186,10 +192,10 @@
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <!-- Product Card 3 -->
-                    <div class="group bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col">
+                    {{-- <div class="group bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col">
                         <div class="relative h-64 overflow-hidden bg-gray-100">
                             <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-xs font-bold px-2 py-1 rounded text-slate-700 shadow-sm z-10">Graines</span>
                             <img src="https://images.unsplash.com/photo-1523301343968-63248330067f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Graines de Basilic" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -206,9 +212,9 @@
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
-                     <!-- Product Card 4 -->
+                     {{-- <!-- Product Card 4 -->
                      <div class="group bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col">
                         <div class="relative h-64 overflow-hidden bg-gray-100">
                             <span class="absolute top-3 left-3 bg-white/90 backdrop-blur text-xs font-bold px-2 py-1 rounded text-slate-700 shadow-sm z-10">Plantes</span>
@@ -227,7 +233,7 @@
                                 </button>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                 </div>
 
