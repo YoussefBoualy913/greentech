@@ -1,0 +1,22 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\User;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+
+class UserSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {   
+         $now = now();
+         User::insert([
+    ['name' => 'youssef','email' =>'youssefboua913@gmail.com','password'=>'12345','role'=>'admin', 'created_at' => $now, 'updated_at' => $now],
+   
+]);
+    }
+}
