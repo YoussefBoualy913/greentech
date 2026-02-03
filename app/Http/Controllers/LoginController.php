@@ -14,7 +14,7 @@ class LoginController extends Controller
     {
       
      
-           return view('visiteur.login');
+       return view('visiteur.login');
       
     }
     
@@ -27,7 +27,7 @@ class LoginController extends Controller
      if(Auth::attempt($valid)){
 
         $request->session()->regenerate();
-        return;
+        return redirect()->route('home');
      }
      return back()->withErrors([
         'email' => 'Identifiants incorrects',

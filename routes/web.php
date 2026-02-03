@@ -7,7 +7,7 @@ use App\Http\Controllers\VisiteurController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/',[VisiteurController::class,'index'])->name('visiteur.index');
+Route::get('/',[VisiteurController::class,'index'])->name('home');
 Route::get('index',[ProductController::class,'index'])->name('products.index');
 Route::get('create',[ProductController::class,'create'])->name('products.create');
 Route::post('store',[ProductController::class,'store'])->name('products.store');

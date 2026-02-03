@@ -72,5 +72,5 @@ class ProductController extends Controller
     { 
         $service-> delete($product);
         return redirect()->route('products.index');
-    }
+    } 
 }
