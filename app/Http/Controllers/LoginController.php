@@ -14,7 +14,7 @@ class LoginController extends Controller
     {
       
      
-           return view('login.login');
+           return view('visiteur.login');
       
     }
     
