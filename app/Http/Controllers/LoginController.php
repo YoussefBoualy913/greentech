@@ -10,7 +10,7 @@ class LoginController extends Controller
 {
 
    
-    public function Loginform(Request $request)
+    public function create(Request $request)
     {
       
      
@@ -18,7 +18,7 @@ class LoginController extends Controller
       
     }
     
-   public function login(Request $request)
+   public function store(Request $request)
    { 
       $valid = $request->validate([
         'email' => 'email',

@@ -22,7 +22,7 @@
             <p class="text-slate-500 mt-2 text-sm">Connectez-vous pour gérer le catalogue.</p>
         </div>
 
-        <form action="{{ route('login') }}" method="POST" class="space-y-6">
+        <form action="{{ route('auth.store') }}" method="POST" class="space-y-6">
             @csrf
             <div>
                 <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Adresse Email</label>

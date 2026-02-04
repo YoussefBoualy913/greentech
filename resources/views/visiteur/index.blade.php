@@ -29,7 +29,7 @@
                     @endguest
                     @auth
                       @if (auth()->user()->role === "client")
-                    <a href="#" class="text-slate-500 hover:text-brand-600 transition-colors">favorites</a>
+                    <a href="{{ route('favorite.index') }}" class="text-slate-500 hover:text-brand-600 transition-colors">favorites</a>
                     @endif
                      @if (auth()->user()->role === "admin")
                         
@@ -43,10 +43,10 @@
                 <div class="flex items-center gap-4">
                     @guest
                     
-                    <a href="{{ route('registerform') }}" class="text-sm font-medium text-slate-500 hover:text-brand-600 flex items-center gap-1">
+                    <a href="{{ route('register.create') }}" class="text-sm font-medium text-slate-500 hover:text-brand-600 flex items-center gap-1">
                         S'inscrire
                     </a>
-                    <a href="{{ route('Loginform') }}" class="bg-brand-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brand-700 transition-colors flex items-center gap-2">
+                    <a href="{{ route('auth.create') }}" class="bg-brand-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brand-700 transition-colors flex items-center gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                         </svg>
@@ -65,7 +65,7 @@
                         @endif
 
                         @if (auth()->user()->role === "client")
-                         <a href="{{route('logout')}}"
+                         <a href="{{route('auth.logout')}}"
                               class="flex items-center px-4 py-2 text-slate-400 rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                               stroke="currentColor" class="w-5 h-5 mr-3">
@@ -178,14 +178,25 @@
                             <div class="mt-auto flex items-center justify-between">
                                 @auth
                                     @if (auth()->user()->role === "client")
-                                     <a href="favorites.html" class="text-slate-400 hover:text-brand-600 relative group mr-4"
+                                    @if (!auth()->user()->favorites->contains($product->id))
+                                        
+                                     <a href="{{ route('favorite.store',$product->id) }}" class="text-slate-400 hover:text-brand-600 relative group mr-4"
                                         title="Mes Favoris">
                                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                           stroke="currentColor" class="w-6 h-6">
                                                <path stroke-linecap="round" stroke-linejoin="round"
                                              d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                                        </svg>
+                                     </svg>
+                                     </a>
+                                     @else
+                                     <a href="{{ route('favorite.store',$product->id) }}" class="text-brand-600 relative group" title="Mes Favoris">
+                                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
+                                          stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                          <path stroke-linecap="round" stroke-linejoin="round"
+                                           d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                                     </svg>
                                        </a>
+                                    @endif
                                     @endif
                                 @endauth
                                 <span class="text-xl font-bold text-brand-600">{{$product->price}} €</span>

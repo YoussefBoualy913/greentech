@@ -22,7 +22,7 @@
             <p class="text-slate-500 mt-2 text-sm">Rejoignez GreenTech Solutions aujourd'hui.</p>
         </div>
 
-        <form action="{{ route('register') }}" method="POST" class="space-y-6">
+        <form action="{{ route('register.store') }}" method="POST" class="space-y-6">
             @csrf
             <div>
                 <label for="fullname" class="block text-sm font-medium text-slate-700 mb-1">Nom complet</label>
@@ -69,7 +69,7 @@
         <div class="mt-6 pt-6 border-t border-gray-100 text-center">
             <p class="text-sm text-slate-500 mb-4">
                 Déjà un compte ? 
-                <a href="{{ route('Loginform') }}" class="font-medium text-brand-600 hover:text-brand-500">Se connecter</a>
+                <a href="{{ route('auth.create') }}" class="font-medium text-brand-600 hover:text-brand-500">Se connecter</a>
             </p>
             <a href="{{ route('home') }}"
                 class="text-sm text-slate-500 hover:text-brand-600 flex items-center justify-center gap-1">

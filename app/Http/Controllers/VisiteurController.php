@@ -24,21 +24,6 @@ class VisiteurController extends Controller
       }
     }
 
-    public function registerform()
-    {
-      return view('visiteur.register');
-    }
-
-    public function register(Request $request)
-    {
-       $validated = $request->validate([
-        'name'=> 'required|string|max:50',
-        'email'=> 'required|email',
-        'password'=> 'required|string|min:5|confirmed',
-      ]);
-      $user = User::create($validated);
-      Auth::login($user);
-     return redirect()->route('home');
-    }
+    
 
 }
