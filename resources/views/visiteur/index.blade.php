@@ -1,38 +1,11 @@
-<!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GreenTech Solutions - Catalogue</title>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            50: '#ecfdf5',
-                            100: '#d1fae5',
-                            500: '#10b981',
-                            600: '#059669',
-                            700: '#047857',
-                            900: '#064e3b',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-</head>
-<body class="bg-gray-50 text-slate-800 font-sans antialiased">
+@extends('layouts.app')
+
+@section('title','GreenTech Solutions - Catalogue')
+    
+@section('body-class','bg-gray-50 text-slate-800 font-sans antialiased')
+    
+
+@section('content')
 
     <!-- Navigation -->
     <nav class="bg-white sticky top-0 z-50 border-b border-gray-100 shadow-sm">
@@ -50,22 +23,60 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="text-brand-600 font-medium">Catalogue</a>
-                    <a href="#" class="text-slate-500 hover:text-brand-600 transition-colors">À Propos</a>
+                    <a href="{{ route('home') }}" class="text-brand-600 font-medium">Catalogue</a>
+                    @guest
+                     <a href="#" class="text-slate-500 hover:text-brand-600 transition-colors">À Propos</a>
+                    @endguest
+                    @auth
+                      @if (auth()->user()->role === "client")
+                    <a href="#" class="text-slate-500 hover:text-brand-600 transition-colors">favorites</a>
+                    @endif
+                     @if (auth()->user()->role === "admin")
+                        
+                       <a href="#" class="text-slate-500 hover:text-brand-600 transition-colors">À Propos</a>
+                        @endif
+                    @endauth
                     <a href="#" class="text-slate-500 hover:text-brand-600 transition-colors">Contact</a>
                 </div>
 
                 <!-- Search & Cart -->
                 <div class="flex items-center gap-4">
-                     <a href="#" class="text-sm font-medium text-slate-500 hover:text-brand-600 flex items-center gap-1">
+                    @guest
+                    
+                    <a href="{{ route('registerform') }}" class="text-sm font-medium text-slate-500 hover:text-brand-600 flex items-center gap-1">
                         S'inscrire
                     </a>
-                    <a href="{{ route('login') }}" class="bg-brand-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brand-700 transition-colors flex items-center gap-2">
+                    <a href="{{ route('Loginform') }}" class="bg-brand-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brand-700 transition-colors flex items-center gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                         </svg>
                         connecxion
                     </a>
+                    @endguest
+                    @auth
+                        @if (auth()->user()->role === "admin")
+                        
+                        <a href="{{ route('products.index') }}" class="bg-brand-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brand-700 transition-colors flex items-center gap-2">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                              </svg>
+                        dashboard
+                        </a>
+                        @endif
+
+                        @if (auth()->user()->role === "client")
+                         <a href="{{route('logout')}}"
+                              class="flex items-center px-4 py-2 text-slate-400 rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
+                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                              stroke="currentColor" class="w-5 h-5 mr-3">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                               d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                             </svg>
+                             Déconnexion
+                         </a>
+        
+                        @endif
+                    @endauth
                 </div>
             </div>
         </div>
@@ -130,7 +141,7 @@
             <section class="flex-1">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-2xl font-bold text-slate-900">Nos Produits</h2>
-                    <form action="{{ route('visiteur.index') }}" method="GET" class="flex justify-between gap-3">
+                    <form action="{{ route('home') }}" method="GET" class="flex justify-between gap-3">
                      <div class="relative hidden sm:block">
                         <input type="text" name="search" placeholder="Rechercher une plante..." class="pl-10 pr-4 py-2 border border-gray-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent w-64 transition-all">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -165,6 +176,18 @@
                             <h3 class="font-bold text-lg text-slate-900 mb-1">{{$product->name}}</h3>
                             <p class="text-sm text-slate-500 line-clamp-2 mb-4">{{$product->discription}}</p>
                             <div class="mt-auto flex items-center justify-between">
+                                @auth
+                                    @if (auth()->user()->role === "client")
+                                     <a href="favorites.html" class="text-slate-400 hover:text-brand-600 relative group mr-4"
+                                        title="Mes Favoris">
+                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                          stroke="currentColor" class="w-6 h-6">
+                                               <path stroke-linecap="round" stroke-linejoin="round"
+                                             d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                                        </svg>
+                                       </a>
+                                    @endif
+                                @endauth
                                 <span class="text-xl font-bold text-brand-600">{{$product->price}} €</span>
                                 <a href="{{route('products.show',$product->id) }}" class="inline-flex items-center justify-center p-2 rounded-lg bg-brand-50 text-brand-600 hover:bg-brand-600 hover:text-white transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-5">
@@ -308,6 +331,4 @@
             </div>
          </div>
     </footer>
-
-</body>
-</html>
+@endsection

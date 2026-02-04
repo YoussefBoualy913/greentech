@@ -10,7 +10,7 @@ class LoginController extends Controller
 {
 
    
-    public function showLoginForm(Request $request)
+    public function Loginform(Request $request)
     {
       
      
@@ -22,12 +22,12 @@ class LoginController extends Controller
    { 
       $valid = $request->validate([
         'email' => 'email',
-        'password' =>'password'
+        'password' => 'required|string|min:3'
       ]);
      if(Auth::attempt($valid)){
-
+         var_dump($valid);
         $request->session()->regenerate();
-        return redirect()->route('home');
+        return redirect()->route('home')->with('succer','welkom back!');
      }
      return back()->withErrors([
         'email' => 'Identifiants incorrects',
@@ -41,7 +41,7 @@ class LoginController extends Controller
           Auth::logout();
           $request->session()->invalidate();     
           $request->session()->regenerateToken();
-          return view('visiteur.index');
+          return redirect()->route('home');
       
     }
 }

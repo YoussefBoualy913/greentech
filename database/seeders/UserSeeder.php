@@ -13,9 +13,12 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {   
-         $now = now();
-         User::insert([
-    ['name' => 'youssef','email' =>'youssefboua913@gmail.com','password'=>'12345','role'=>'admin', 'created_at' => $now, 'updated_at' => $now],
+        
+         User::create([
+             'name' => 'youssef',
+             'email' =>'youssefboua913@gmail.com',
+             'password'=>'12345',
+             'role'=>'admin'
    
 ]);
     }

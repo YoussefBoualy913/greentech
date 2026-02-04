@@ -22,10 +22,11 @@
             <p class="text-slate-500 mt-2 text-sm">Rejoignez GreenTech Solutions aujourd'hui.</p>
         </div>
 
-        <form action="index.html" method="get" class="space-y-6">
+        <form action="{{ route('register') }}" method="POST" class="space-y-6">
+            @csrf
             <div>
                 <label for="fullname" class="block text-sm font-medium text-slate-700 mb-1">Nom complet</label>
-                <input type="text" id="fullname" name="fullname"
+                <input type="text" id="fullname" name="name"
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all placeholder-gray-400"
                     placeholder="Jean Dupont" required>
             </div>
@@ -46,7 +47,7 @@
 
             <div>
                 <label for="confirm_password" class="block text-sm font-medium text-slate-700 mb-1">Confirmer le mot de passe</label>
-                <input type="password" id="confirm_password" name="confirm_password"
+                <input type="password" id="confirm_password" name="password_confirmation"
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all placeholder-gray-400"
                     placeholder="••••••••" required>
             </div>
@@ -68,9 +69,9 @@
         <div class="mt-6 pt-6 border-t border-gray-100 text-center">
             <p class="text-sm text-slate-500 mb-4">
                 Déjà un compte ? 
-                <a href="admin-login.html" class="font-medium text-brand-600 hover:text-brand-500">Se connecter</a>
+                <a href="{{ route('Loginform') }}" class="font-medium text-brand-600 hover:text-brand-500">Se connecter</a>
             </p>
-            <a href="index.html"
+            <a href="{{ route('home') }}"
                 class="text-sm text-slate-500 hover:text-brand-600 flex items-center justify-center gap-1">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-4">

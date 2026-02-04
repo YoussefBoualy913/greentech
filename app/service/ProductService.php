@@ -19,7 +19,7 @@ public function index()
 
  public function store(StoreproductRequest $request)
     {
-        $validated = $request->validated();
+        $validated = $request->all();
     
     if ($request->hasFile('image')) {
         $file = $request->file('image');
@@ -40,7 +40,7 @@ public function index()
 
     public function update(updateproductRequest $request ,Product $product)
     {
-     $validated = $request->validated();
+     $validated = $request->all();
      $category = Category::where('name',$validated['categoryname'])->first();
      $product->update([
         'name'        => $validated['name'],

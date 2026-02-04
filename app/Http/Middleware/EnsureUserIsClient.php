@@ -21,7 +21,7 @@ class EnsureUserIsClient
          return redirect()->route('home');
         }
 
-         if(Auth::user()->role !="client")
+         if(Auth::user()->role !=="client")
         {
             abort(403);
         }

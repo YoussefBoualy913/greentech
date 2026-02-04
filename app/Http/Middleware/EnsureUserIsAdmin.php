@@ -21,7 +21,7 @@ class EnsureUserIsAdmin
          return redirect()->route('home');
         }
 
-         if(Auth::user()->role !="admin")
+         if(Auth::user()->role !=="admin")
         {
             abort(403);
         }

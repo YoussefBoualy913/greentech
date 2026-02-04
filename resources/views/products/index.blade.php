@@ -54,7 +54,7 @@
         </nav>
 
         <div class="p-4 border-t border-slate-800">
-            <a href="{{route('visiteur.index')}}"
+            <a href="{{route('logout')}}"
                 class="flex items-center px-4 py-2 text-slate-400 rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-5 h-5 mr-3">
