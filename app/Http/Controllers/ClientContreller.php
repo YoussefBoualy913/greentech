@@ -20,7 +20,7 @@ class ClientContreller extends Controller
     public function store(Product $product)
     {
         Auth::user()->favorites()->toggle($product->id);
-        return redirect()->route('home');
+        return back();
 
     }
 }

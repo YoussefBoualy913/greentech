@@ -27,42 +27,27 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="text-slate-500 hover:text-brand-600 transition-colors">Catalogue</a>
-                    <a href="#" class="text-slate-500 hover:text-brand-600 transition-colors">À Propos</a>
+                    <a href="{{route('home') }}" class="text-slate-500 hover:text-brand-600 transition-colors">Catalogue</a>
+                    <a href="#" class="text-brand-600 transition-colors">favorites</a>
                     <a href="#" class="text-slate-500 hover:text-brand-600 transition-colors">Contact</a>
                 </div>
 
-                <!-- Search & Cart -->
-                <div class="flex items-center gap-4">
-                    <div class="relative hidden sm:block">
-                        <input type="text" placeholder="Rechercher une plante..."
-                            class="pl-10 pr-4 py-2 border border-gray-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent w-64 transition-all">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                    </div>
+                
+                
 
-                    <!-- Favorites Link (Active) -->
-                    <a href="favorites.html" class="text-brand-600 relative group" title="Mes Favoris">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                   
+                   @if (auth()->user()->role === "client")
+                         <a href="{{route('auth.logout')}}"
+                              class="flex items-center px-4 py-2 text-slate-400 rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
+                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                              stroke="currentColor" class="w-5 h-5 mr-3">
                             <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                        </svg>
-                    </a>
-
-                    <a href="admin-login.html"
-                        class="text-sm font-medium text-slate-500 hover:text-brand-600 flex items-center gap-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-4 h-4">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                        </svg>
-                        Admin
-                    </a>
+                               d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                             </svg>
+                             Déconnexion
+                         </a>
+        
+                    @endif
                 </div>
             </div>
         </div>
@@ -85,14 +70,14 @@
            
             <div
                 class="group bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col relative">
-                <button
+                <a href="{{ route('favorite.store',$favorite->id) }}"
                     class="absolute top-3 right-3 z-20 text-green-500 hover:text-green-600 hover:scale-110 transition-all bg-white rounded-full p-1.5 shadow-sm"
                     title="Retirer des favoris">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
                         <path
                             d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
                     </svg>
-                </button>
+                </a>
                 <div class="relative h-64 overflow-hidden bg-gray-100">
                     <span
                         class="absolute top-3 left-3 bg-white/90 backdrop-blur text-xs font-bold px-2 py-1 rounded text-slate-700 shadow-sm z-10">{{$favorite->category->name}}</span>
@@ -105,7 +90,7 @@
                     <p class="text-sm text-slate-500 line-clamp-2 mb-4">{{$favorite->discription}}</p>
                     <div class="mt-auto flex items-center justify-between">
                         <span class="text-xl font-bold text-brand-600">{{$favorite->price}} €</span>
-                        <a href="product-details.html"
+                        <a href="{{route('products.show',$favorite->id) }}"
                             class="inline-flex items-center justify-center p-2 rounded-lg bg-brand-50 text-brand-600 hover:bg-brand-600 hover:text-white transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                                 stroke="currentColor" class="size-5">
