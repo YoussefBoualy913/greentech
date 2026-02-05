@@ -51,7 +51,7 @@
         <header class="h-16 bg-white border-b border-gray-100 flex items-center justify-between px-8">
             <h2 class="text-xl font-bold text-slate-800">Ajouter un produit</h2>
             <div class="flex items-center gap-4">
-                <a href="admin-dashboard.html"
+                <a href="{{route('products.index')}}"
                     class="text-sm font-medium text-slate-500 hover:text-slate-700">Annuler</a>
             </div>
         </header>

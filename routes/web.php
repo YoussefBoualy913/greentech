@@ -26,12 +26,12 @@ Route::prefix('/auth')->group(function(){
 });
 
 //admin
-Route::resource('products', ProductController::class)->only('index','create','store','edit','update','destroy')->middleware(EnsureUserIsAdmin::class);
+Route::resource('products', ProductController::class)->only(['index','create','store','edit','update','destroy']);
 
 //Client
 Route::prefix('/client')->middleware(EnsureUserIsClient::class)->controller(ClientContreller::class)->group(function(){
     Route::get('/index','index')->name('favorite.index');
-    Route::get('/store/{product}','store')->name('favorite.store');
+    Route::put('/store/{product}','store')->name('favorite.store');
     
     });
 

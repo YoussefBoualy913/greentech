@@ -36,6 +36,7 @@ class ProductController extends Controller
     public function store(StoreproductRequest $request ,ProductService $service)
     {
        $service->store($request);
+       
     return redirect()->route('products.index')->with('success','Produit créé avec succès !');
 
     }
