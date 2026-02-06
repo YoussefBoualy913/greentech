@@ -30,7 +30,7 @@ class LoginController extends Controller
         return redirect()->route('home')->with('succer','welkom back!');
      }
      return back()->withErrors([
-        'email' => 'Identifiants incorrects',
+        'email' => 'Identifiants ou mot de passe incorrects',
     ]);
    }
 

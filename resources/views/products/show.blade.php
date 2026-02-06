@@ -12,7 +12,7 @@
     <nav class="bg-white sticky top-0 z-50 border-b border-gray-100 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
-                <a href="index.html" class="flex-shrink-0 flex items-center gap-2">
+                <a href="{{ route('home') }}" class="flex-shrink-0 flex items-center gap-2">
                     <div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-5">
@@ -24,31 +24,49 @@
                 </a>
 
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="text-slate-500 hover:text-brand-600 transition-colors">Catalogue</a>
+                    <a href="{{ route('home') }}" class="text-slate-500 hover:text-brand-600 transition-colors">Catalogue</a>
                     <a href="#" class="text-slate-500 hover:text-brand-600 transition-colors">À Propos</a>
                     <a href="#" class="text-slate-500 hover:text-brand-600 transition-colors">Contact</a>
                 </div>
 
                 <div class="flex items-center gap-4">
-                    <div class="relative hidden sm:block">
-                        <input type="text" placeholder="Rechercher..."
-                            class="pl-10 pr-4 py-2 border border-gray-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent w-48 lg:w-64 transition-all">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                    </div>
-                    <a href="admin-login.html"
-                        class="text-sm font-medium text-slate-500 hover:text-brand-600 flex items-center gap-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-4 h-4">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                        </svg>
-                        Admin
+                    @guest
+                    
+                    <a href="{{ route('register.create') }}" class="text-sm font-medium text-slate-500 hover:text-brand-600 flex items-center gap-1">
+                        S'inscrire
                     </a>
+                    <a href="{{ route('auth.create') }}" class="bg-brand-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brand-700 transition-colors flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                        </svg>
+                        connecxion
+                    </a>
+                    @endguest
+                    @auth
+                        @if (auth()->user()->role === "admin")
+                        
+                        <a href="{{ route('products.index') }}" class="bg-brand-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brand-700 transition-colors flex items-center gap-2">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                              </svg>
+                        dashboard
+                        </a>
+                        @endif
+
+                        @if (auth()->user()->role === "client")
+                         <a href="{{route('auth.logout')}}"
+                              class="flex items-center px-4 py-2 text-slate-400 rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
+                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                              stroke="currentColor" class="w-5 h-5 mr-3">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                               d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                             </svg>
+                             Déconnexion
+                         </a>
+        
+                        @endif
+                    @endauth
+                   
                 </div>
             </div>
         </div>
@@ -60,7 +78,7 @@
             <nav class="flex" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-3">
                     <li class="inline-flex items-center">
-                        <a href="index.html"
+                        <a href="{{ route('home') }}"
                             class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-brand-600">
                             Catalogue
                         </a>
@@ -72,7 +90,7 @@
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="2" d="m1 9 4-4-4-4" />
                             </svg>
-                            <a href="#"
+                            <a href="{{ route('home') }}"
                                 class="ml-1 text-sm font-medium text-gray-700 hover:text-brand-600 md:ml-2">{{$product->category->name}}</a>
                         </div>
                     </li>
