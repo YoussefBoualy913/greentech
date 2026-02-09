@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('title','Administration - GreenTech Solution')
@@ -6,8 +7,6 @@
     
 
 @section('content')
-
-    
     <!-- Sidebar -->
     <aside class="w-64 bg-slate-900 border-r border-slate-800 hidden lg:flex flex-col">
         <div class="h-16 flex items-center px-6 border-b border-slate-800">
@@ -24,8 +23,9 @@
         </div>
 
         <nav class="flex-1 p-4 space-y-1 overflow-y-auto">
-            <a href="#"
-                class="flex items-center px-4 py-2 bg-brand-600 text-white rounded-lg shadow-sm">
+            
+           <a href="{{ route('products.index') }}"
+                class="flex items-center px-4 py-2 text-slate-400 rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-5 h-5 mr-3">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -42,7 +42,7 @@
 
                 Produits
             </a>
-              <a href="{{ route('users.index') }}" class="flex items-center px-4 py-2 text-slate-400 rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
+            <a href="{{ route('users.index') }}" class="flex items-center px-4 py-2 bg-brand-600 text-white rounded-lg shadow-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-5 h-5 mr-3">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -64,7 +64,7 @@
         </nav>
 
         <div class="p-4 border-t border-slate-800">
-            <a href="{{route('auth.logout')}}"
+            <a href="index.html"
                 class="flex items-center px-4 py-2 text-slate-400 rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-5 h-5 mr-3">
@@ -81,7 +81,7 @@
 
         <!-- Header -->
         <header class="h-16 bg-white border-b border-gray-100 flex items-center justify-between px-8">
-            <h2 class="text-xl font-bold text-slate-800">Gestion des Stocks</h2>
+            <h2 class="text-xl font-bold text-slate-800">Gestion des Utilisateurs</h2>
             <div class="flex items-center gap-4">
                 <span class="text-sm font-medium text-slate-600">Admin User</span>
                 <div
@@ -96,7 +96,7 @@
 
             <div class="flex justify-between items-center mb-6">
                 <div class="relative">
-                    <input type="text" placeholder="Rechercher..."
+                    <input type="text" placeholder="Rechercher un utilisateur..."
                         class="pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent w-64">
                     <svg xmlns="http://www.w3.org/2000/svg"
                         class="h-5 w-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none"
@@ -105,13 +105,13 @@
                             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                 </div>
-                <a href="{{ route('products.create')}}"
+                <a href="{{ route('users.create') }}"
                     class="bg-brand-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brand-700 transition-colors flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                         stroke="currentColor" class="size-4">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
-                    Nouveau Produit
+                    Nouvel Utilisateur
                 </a>
             </div>
 
@@ -119,125 +119,118 @@
                 <table class="w-full text-left border-collapse">
                     <thead>
                         <tr class="bg-gray-50 text-slate-600 text-xs uppercase tracking-wider border-b border-gray-200">
-                            <th class="px-6 py-4 font-semibold">Produit</th>
-                            <th class="px-6 py-4 font-semibold">Catégorie</th>
-                            <th class="px-6 py-4 font-semibold">Prix</th>
-                            <th class="px-6 py-4 font-semibold">Stock</th>
+                            <th class="px-6 py-4 font-semibold">Utilisateur</th>
+                            <th class="px-6 py-4 font-semibold">Email</th>
+                            <th class="px-6 py-4 font-semibold">Rôle</th>
+                            <th class="px-6 py-4 font-semibold">Statut</th>
                             <th class="px-6 py-4 font-semibold text-right">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100">
-                        <!-- Row 1 -->
-                        @foreach ($products as  $product)
-                            
+                        <!-- User 1 -->
                         <tr class="hover:bg-gray-50 transition-colors">
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-4">
-                                    <img src="{{$product->image_url}}"
-                                    alt="" class="w-10 h-10 rounded-lg object-cover">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center text-slate-600 font-bold">
+                                        AL
+                                    </div>
                                     <div>
-                                        <div class="font-medium text-slate-900">{{$product->name}}</div>
+                                        <div class="font-medium text-slate-900">Alice Laurent</div>
+                                        <div class="text-xs text-slate-500">Inscrit le 12/01/2026</div>
                                     </div>
                                 </div>
                             </td>
+                            <td class="px-6 py-4 text-slate-600 font-medium">alice.laurent@example.com</td>
                             <td class="px-6 py-4">
                                 <span
-                                class="bg-green-100 text-green-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-green-200">{{$product->category->name}}</span>
+                                    class="bg-purple-100 text-purple-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-purple-200">Admin</span>
                             </td>
-                            <td class="px-6 py-4 text-slate-600 font-medium">{{$product->price}} €</td>
                             <td class="px-6 py-4">
-                                <span class="text-slate-600">{{$product->stock}}</span>
+                                <div class="flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                                    <span class="text-sm text-slate-600">Actif</span>
+                                </div>
                             </td>
-                            <td class="px-6 py-4 text-right flex space-x-2">
-                                <a href="{{route('products.edit',$product->id)}}"
-                                class="text-amber-700 hover:text-brand-800 font-medium text-sm">Éditer</a>
-                                <form action="{{route('products.destroy',$product->id)}}" method="POST"  onsubmit="return confirm('Supprimer ce produit ?')">
-                                @method('DELETE')
-                                @csrf
-                                <button type="submit" class="text-red-500 hover:text-red-700 font-medium text-sm">Supprimer</button>
-                                </form>
+                            <td class="px-6 py-4 text-right space-x-2">
+                                <a href="#" class="text-brand-600 hover:text-brand-800 font-medium text-sm">Éditer</a>
+                                <button class="text-red-500 hover:text-red-700 font-medium text-sm">Supprimer</button>
                             </td>
                         </tr>
-                        @endforeach
 
-                        {{-- <!-- Row 2 -->
+                        <!-- User 2 -->
                         <tr class="hover:bg-gray-50 transition-colors">
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-4">
-                                    <img src="https://images.unsplash.com/photo-1598282361138-b6ec72b4f2c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
-                                        alt="" class="w-10 h-10 rounded-lg object-cover">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center text-slate-600 font-bold">
+                                        JM
+                                    </div>
                                     <div>
-                                        <div class="font-medium text-slate-900">Sécateur Pro</div>
-                                        <div class="text-xs text-slate-500">Ref: TLS-042</div>
+                                        <div class="font-medium text-slate-900">Jean Martin</div>
+                                        <div class="text-xs text-slate-500">Inscrit le 15/01/2026</div>
                                     </div>
                                 </div>
                             </td>
+                            <td class="px-6 py-4 text-slate-600 font-medium">jean.martin@example.com</td>
                             <td class="px-6 py-4">
                                 <span
-                                    class="bg-amber-100 text-amber-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-amber-200">Outils</span>
+                                    class="bg-blue-100 text-blue-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-blue-200">Éditeur</span>
                             </td>
-                            <td class="px-6 py-4 text-slate-600 font-medium">14.50 €</td>
                             <td class="px-6 py-4">
-                                <span class="text-slate-600">12</span>
+                                <div class="flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                                    <span class="text-sm text-slate-600">Actif</span>
+                                </div>
                             </td>
                             <td class="px-6 py-4 text-right space-x-2">
-                                <a href="admin-product-form.html"
-                                    class="text-brand-600 hover:text-brand-800 font-medium text-sm">Éditer</a>
+                                <a href="#" class="text-brand-600 hover:text-brand-800 font-medium text-sm">Éditer</a>
                                 <button class="text-red-500 hover:text-red-700 font-medium text-sm">Supprimer</button>
                             </td>
-                        </tr> --}}
+                        </tr>
 
-                        <!-- Row 3 -->
-                        {{-- <tr class="hover:bg-gray-50 transition-colors">
+                        <!-- User 3 -->
+                        <tr class="hover:bg-gray-50 transition-colors">
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-4">
-                                    <img src="https://images.unsplash.com/photo-1599598425947-d35275e7a9b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
-                                        alt="" class="w-10 h-10 rounded-lg object-cover grayscale opacity-70">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center text-slate-600 font-bold">
+                                        SD
+                                    </div>
                                     <div>
-                                        <div class="font-medium text-slate-900 text-opacity-70">Pilea Peperomioides
-                                        </div>
-                                        <div class="text-xs text-slate-500">Ref: PL-005</div>
+                                        <div class="font-medium text-slate-900">Sophie Dubois</div>
+                                        <div class="text-xs text-slate-500">Inscrit le 20/01/2026</div>
                                     </div>
                                 </div>
                             </td>
+                            <td class="px-6 py-4 text-slate-600 font-medium">sophie.dubois@example.com</td>
                             <td class="px-6 py-4">
                                 <span
-                                    class="bg-green-100 text-green-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-green-200">Plantes</span>
+                                    class="bg-orange-100 text-orange-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-orange-200">Gestionnaire</span>
                             </td>
-                            <td class="px-6 py-4 text-slate-600 font-medium text-opacity-70">12.00 €</td>
                             <td class="px-6 py-4">
-                                <span
-                                    class="bg-red-100 text-red-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-red-200">Rupture</span>
+                                <div class="flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-gray-300"></span>
+                                    <span class="text-sm text-slate-500">Inactif</span>
+                                </div>
                             </td>
                             <td class="px-6 py-4 text-right space-x-2">
-                                <a href="admin-product-form.html"
-                                    class="text-brand-600 hover:text-brand-800 font-medium text-sm">Éditer</a>
+                                <a href="#" class="text-brand-600 hover:text-brand-800 font-medium text-sm">Éditer</a>
                                 <button class="text-red-500 hover:text-red-700 font-medium text-sm">Supprimer</button>
                             </td>
-                        </tr> --}}
+                        </tr>
                     </tbody>
                 </table>
                 <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between">
-                    <span class="text-sm text-slate-500">Affichage de {{ $products->currentPage() }} sur {{ $products->lastPage() }} page </span>
-                    <span class="text-sm text-slate-500">Total  {{ $products->total() }} produits</span>
+                    <span class="text-sm text-slate-500">Affichage de 1 à 3 sur 12 utilisateurs</span>
                     <div class="flex gap-1">
-                         @if ($products->onFirstPage())
-                        <button  class="px-3 py-1 border border-gray-200 rounded text-sm disabled:opacity-50"
+                        <button class="px-3 py-1 border border-gray-200 rounded text-sm disabled:opacity-50"
                             disabled>Précédent</button>
-                        @else
-                         <a href="{{ $products->previousPageUrl() }}" class="px-3 py-1 border border-gray-200 rounded text-sm "
-                            >Précédent</a>
-                        @endif
-                        @if($products->hasMorePages())
-                        <a href="{{ $products->nextPageUrl() }}" class="px-3 py-1 border border-gray-200 rounded text-sm hover:bg-gray-50">Suivant</a>
-                        @else
-                        <button  class="px-3 py-1 border border-gray-200 rounded text-sm disabled:opacity-50"
-                            disabled>Suivant</button>
-                        @endif
+                        <button
+                            class="px-3 py-1 border border-gray-200 rounded text-sm hover:bg-gray-50">Suivant</button>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-
 @endsection
