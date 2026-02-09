@@ -5,6 +5,7 @@ use App\Http\Controllers\ClientContreller;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterContreller;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisiteurController;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,7 @@ Route::prefix('/auth')->group(function(){
 //admin
 Route::resource('products', ProductController::class)->only(['index','create','store','edit','update','destroy']);
 Route::resource('users', UserController::class);
+Route::resource('roles', RoleController::class);
 
 //Client
 Route::prefix('/client')->middleware(EnsureUserIsClient::class)->controller(ClientContreller::class)->group(function(){
