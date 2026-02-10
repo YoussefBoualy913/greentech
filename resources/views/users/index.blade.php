@@ -50,6 +50,14 @@
                 </svg>
                 Utilisateurs
             </a>
+             <a href="{{ route('roles.index') }}" class="flex items-center px-4 py-2 text-slate-400 rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-5 h-5 mr-3">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z" />
+                </svg>
+                Rôles
+            </a>
             <a href="{{ route('home') }}"
                 class="flex items-center px-4 py-2 text-slate-400 rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -122,12 +130,14 @@
                             <th class="px-6 py-4 font-semibold">Utilisateur</th>
                             <th class="px-6 py-4 font-semibold">Email</th>
                             <th class="px-6 py-4 font-semibold">Rôle</th>
-                            <th class="px-6 py-4 font-semibold">Statut</th>
                             <th class="px-6 py-4 font-semibold text-right">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100">
                         <!-- User 1 -->
+                       @foreach ($users as $user )
+                           
+                      
                         <tr class="hover:bg-gray-50 transition-colors">
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-4">
@@ -136,30 +146,37 @@
                                         AL
                                     </div>
                                     <div>
-                                        <div class="font-medium text-slate-900">Alice Laurent</div>
-                                        <div class="text-xs text-slate-500">Inscrit le 12/01/2026</div>
+                                        <div class="font-medium text-slate-900">{{$user->name}}</div>
+                                        <div class="text-xs text-slate-500">Inscrit le {{$user->created_at}}</div>
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-6 py-4 text-slate-600 font-medium">alice.laurent@example.com</td>
+                            <td class="px-6 py-4 text-slate-600 font-medium">{{$user->email}}</td>
                             <td class="px-6 py-4">
                                 <span
-                                    class="bg-purple-100 text-purple-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-purple-200">Admin</span>
+                                @if ($user->role  === "admin")
+                                    
+                                class="bg-purple-100 text-purple-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-purple-200">{{$user->role}}
+                                @endif
+                                @if ($user->role  === "client")
+                                    
+                                class="bg-purple-100  text-blue-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-purple-200">{{$user->role}}
+                                @endif
+                                 @if ($user->role  === "Éditeur")
+                                    
+                                class="bg-purple-100 hover:text-red-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-purple-200">{{$user->role}}
+                                @endif
+                                </span>
                             </td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-2">
-                                    <span class="w-2 h-2 rounded-full bg-green-500"></span>
-                                    <span class="text-sm text-slate-600">Actif</span>
-                                </div>
-                            </td>
+                           
                             <td class="px-6 py-4 text-right space-x-2">
                                 <a href="#" class="text-brand-600 hover:text-brand-800 font-medium text-sm">Éditer</a>
                                 <button class="text-red-500 hover:text-red-700 font-medium text-sm">Supprimer</button>
                             </td>
                         </tr>
-
+                     @endforeach
                         <!-- User 2 -->
-                        <tr class="hover:bg-gray-50 transition-colors">
+                        {{-- <tr class="hover:bg-gray-50 transition-colors">
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-4">
                                     <div
@@ -187,10 +204,10 @@
                                 <a href="#" class="text-brand-600 hover:text-brand-800 font-medium text-sm">Éditer</a>
                                 <button class="text-red-500 hover:text-red-700 font-medium text-sm">Supprimer</button>
                             </td>
-                        </tr>
+                        </tr> --}}
 
                         <!-- User 3 -->
-                        <tr class="hover:bg-gray-50 transition-colors">
+                        {{-- <tr class="hover:bg-gray-50 transition-colors">
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-4">
                                     <div
@@ -218,7 +235,7 @@
                                 <a href="#" class="text-brand-600 hover:text-brand-800 font-medium text-sm">Éditer</a>
                                 <button class="text-red-500 hover:text-red-700 font-medium text-sm">Supprimer</button>
                             </td>
-                        </tr>
+                        </tr> --}}
                     </tbody>
                 </table>
                 <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between">
