@@ -2,8 +2,7 @@
 namespace App\service;
 
 use App\Http\Requests\StoreroleRequest;
-use App\Models\role;
-
+use Spatie\Permission\Models\Role;
 
 class RoleService
 {

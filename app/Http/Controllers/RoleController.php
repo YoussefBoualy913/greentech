@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreroleRequest;
-use App\Models\role;
 use App\service\RoleService;
 use Illuminate\Http\Request;
-
+use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
@@ -60,7 +59,7 @@ class RoleController extends Controller
      */
     public function update(Request $request,RoleService $service , Role $role)
     {
-         $service->update($request,$role);
+         $service->update($request, $role);
          return redirect()->route('roles.index');
     }
 

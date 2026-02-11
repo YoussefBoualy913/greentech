@@ -72,4 +72,6 @@ class UserController extends Controller
     {
        $service->delete($user);
     }
+
+    
 }
