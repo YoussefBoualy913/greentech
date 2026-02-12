@@ -2,6 +2,7 @@
 namespace App\service;
 
 use App\Http\Requests\StoreroleRequest;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleService
@@ -10,14 +11,23 @@ class RoleService
 
 public function index()
 {
-  return   $user = Role::all();
+  $roles = Role::all();
+  $permissions = Permission::all();
+  return $data =[
+    'roles' => $roles,
+    'permissions' => $permissions
+  ];
 
 }
 
  public function store(StoreroleRequest $request)
     {
-      role::create($request->validated());
-      
+      Role::firstOrCreate($request->validated());
+      $rolename = $request->name;
+      $Role = Role::where('name',$rolename)->first();
+
+      $Role->syncPermissions($request->permissions);
+
       }
       
       public function update(StoreroleRequest $request ,role $role)

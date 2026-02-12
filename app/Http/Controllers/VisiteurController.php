@@ -12,7 +12,6 @@ class VisiteurController extends Controller
 {
     public function index(Request $request)
     {
-      
       if (!$request->filled('search')) {
          $products = Product::with('category')->get();
          return view('visiteur.index',compact('products'));

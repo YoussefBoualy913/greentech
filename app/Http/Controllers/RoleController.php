@@ -15,8 +15,9 @@ class RoleController extends Controller
      */
     public function index(RoleService $service)
     {  
-        $roles = $service->index();
-        return view('roles.roles',compact('roles'));
+        $data = $service->index();
+        //  dd($data['permissions']);
+        return view('roles.roles',$data);
         }
         
         /**
@@ -25,7 +26,7 @@ class RoleController extends Controller
         public function create()
         {   
 
-            return view('roles.roles');
+            return redirect()->route('roles.index');
             
     }
 
@@ -33,7 +34,8 @@ class RoleController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreroleRequest $request,RoleService $service)
-    {
+    {    
+        
         $service->store($request);
         return redirect()->route('roles.index');
     }

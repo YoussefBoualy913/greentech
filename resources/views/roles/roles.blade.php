@@ -7,8 +7,6 @@
 
 @section('content')
 
-
-
     <!-- Sidebar -->
     <aside class="w-64 bg-slate-900 border-r border-slate-800 hidden lg:flex flex-col">
         <div class="h-16 flex items-center px-6 border-b border-slate-800">
@@ -25,7 +23,7 @@
         </div>
 
         <nav class="flex-1 p-4 space-y-1 overflow-y-auto">
-             <a href="{{ route('products.index') }}"
+            <a href="admin-dashboard.html"
                 class="flex items-center px-4 py-2 text-slate-400 rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-5 h-5 mr-3">
@@ -34,16 +32,17 @@
                 </svg>
                 Dashboard
             </a>
-            <a href="{{ route('products.create') }}" class="flex items-center px-4 py-2 text-slate-400 rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-3">
-               <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
-
+            <a href="admin-dashboard.html"
+                class="flex items-center px-4 py-2 text-slate-400 rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-5 h-5 mr-3">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0l-3-3m3 3l3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+                </svg>
                 Produits
             </a>
-              <a href="{{ route('users.index') }}" class="flex items-center px-4 py-2 text-slate-400 rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
+            <a href="users.html"
+                class="flex items-center px-4 py-2 text-slate-400 rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-5 h-5 mr-3">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -51,7 +50,7 @@
                 </svg>
                 Utilisateurs
             </a>
-             <a href="" class="flex items-center px-4 py-2 bg-brand-600 text-white rounded-lg shadow-sm">
+            <a href="roles.html" class="flex items-center px-4 py-2 bg-brand-600 text-white rounded-lg shadow-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-5 h-5 mr-3">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -59,18 +58,16 @@
                 </svg>
                 Rôles
             </a>
-            <a href="{{ route('home') }}"
+            <a href="#"
                 class="flex items-center px-4 py-2 text-slate-400 rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-               stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-3">
-               <path stroke-linecap="round" stroke-linejoin="round"
-                d="M15 19l-7-7 7-7" />
-              </svg>
-
-
-                catalogue
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-5 h-5 mr-3">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.212 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                Paramètres
             </a>
-            
         </nav>
 
         <div class="p-4 border-t border-slate-800">
@@ -107,18 +104,38 @@
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
                 <!-- Create Role Form -->
-                <div class="lg:col-span-1">
-                    <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
+                <div class="lg:col-span-1" id="role-creation-container">
+                    <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-6" id="role-creation-card">
                         <h3 class="font-bold text-slate-800 text-lg mb-4">Créer un nouveau rôle</h3>
-                        <form action="roles.html" class="space-y-4">
+                        <form action="{{ route('roles.store')}}" class="space-y-4" method="POST">
+                            @csrf
                             <div>
                                 <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Nom du
                                     Rôle</label>
                                 <input type="text" id="name" name="name"
                                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-all placeholder-gray-400"
                                     placeholder="Ex: Modérateur">
+                                 @error('name')
+                                   <p class="text-red-500">{{ $message }}</p>
+                                 @enderror
                             </div>
-                            <button type="submit"
+
+                            <div id="permissions-section" class="mt-4 hidden">
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Permissions</label>
+                                <div class="space-y-3">
+                                    @foreach ($permissions as $permission)
+                                        
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="permissions[]" value="{{$permission->name}}"
+                                        class="w-4 h-4 text-brand-600 border-gray-300 rounded focus:ring-brand-500">
+                                        <span class="ml-2 text-sm text-slate-600">{{$permission->name}}</span>
+                                    </label>
+                                    @endforeach
+                                   
+                                </div>
+                            </div>
+
+                            <button type="submit" id="submit-btn"
                                 class="w-full px-4 py-2.5 rounded-lg bg-brand-600 text-white font-medium hover:bg-brand-700 transition-colors shadow-lg shadow-brand-500/30">
                                 Ajouter
                             </button>
@@ -127,7 +144,7 @@
                 </div>
 
                 <!-- Roles List -->
-                <div class="lg:col-span-2">
+                <div class="lg:col-span-2" id="roles-list-section">
                     <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
                         <div class="px-6 py-4 border-b border-gray-100">
                             <h3 class="font-bold text-slate-800 text-lg">Liste des rôles</h3>
@@ -195,4 +212,44 @@
 
         </div>
     </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector('form');
+            const nameInput = document.getElementById('name');
+            const permissionsSection = document.getElementById('permissions-section');
+            const rolesListSection = document.getElementById('roles-list-section');
+            const submitBtn = document.getElementById('submit-btn');
+
+            submitBtn.addEventListener('click', (e) => {
+                // If permissions are hidden, we are in step 1
+                if (permissionsSection.classList.contains('hidden')) {
+                    e.preventDefault(); // Stop form submission
+
+                    if (nameInput.value.trim() === "") {
+                        alert("Veuillez entrer un nom de rôle.");
+                        return;
+                    }
+
+                    // Transition to step 2
+                    nameInput.readonly = true;
+                    nameInput.classList.add('bg-gray-100', 'cursor-not-allowed');
+
+                    permissionsSection.classList.remove('hidden');
+                    rolesListSection.classList.add('hidden');
+
+                    // Center the form
+                    const roleCreationContainer = document.getElementById('role-creation-container');
+                    const roleCreationCard = document.getElementById('role-creation-card');
+
+                    roleCreationContainer.classList.remove('lg:col-span-1');
+                    roleCreationContainer.classList.add('lg:col-span-3');
+                    roleCreationCard.classList.add('max-w-2xl', 'mx-auto');
+
+                    submitBtn.textContent = "Sauvegarder le Rôle";
+                    submitBtn.type = "submit"; // Ensure next click submits
+                }
+            });
+        });
+    </script>
 @endsection
