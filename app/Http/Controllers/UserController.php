@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\user;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreuserRequest;
+use App\Http\Requests\UpdateuserRequest;
 use App\Models\User as ModelsUser;
 use App\service\UserService;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -26,8 +28,14 @@ class UserController extends Controller
         */
         public function create()
         {   
-
-            return view('users.create');
+            $roles = Role::all();
+            $data = [
+                'user' => null,
+                'roles' => $roles,
+                'route' => route('users.store'),
+                'method' => 'POST'
+            ];
+            return view('users.create',$data);
             
     }
 
@@ -53,13 +61,20 @@ class UserController extends Controller
      */
     public function edit(user $user)
     {
-        
+         $roles = Role::all();
+         $data = [
+                'user' => $user,
+                'roles' => $roles,
+                'route' => route('users.update',$user),
+                'method' => 'PUT'
+            ];
+         return view('users.create',$data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,UserService $service , user $user)
+    public function update(UpdateuserRequest $request,UserService $service , user $user)
     {
          $service->update($request,$user);
          return redirect()->route('users.index');
@@ -71,6 +86,8 @@ class UserController extends Controller
     public function destroy(user $user,UserService $service)
     {
        $service->delete($user);
+       return redirect()->route('users.index');
+
     }
 
     

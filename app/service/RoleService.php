@@ -15,7 +15,9 @@ public function index()
   $permissions = Permission::all();
   return $data =[
     'roles' => $roles,
-    'permissions' => $permissions
+    'permissions' => $permissions,
+    'route'   => route('roles.store'),
+    'method'  => 'POST',
   ];
 
 }
@@ -30,16 +32,22 @@ public function index()
 
       }
       
-      public function update(StoreroleRequest $request ,role $role)
+      public function update(StoreroleRequest $request ,Role $role)
     {
           
           $role->update($request->validated());
-       
+          
+          $rolename = $request->name;
+          $Role = Role::where('name',$rolename)->first();
+
+          $Role->syncPermissions($request->permissions);
+          
     
     }
 
-    public function  delete(role $role)
+    public function  delete(Role $role)
     {
+     
      $role->delete();
     }
 

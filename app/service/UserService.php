@@ -12,13 +12,14 @@ class UserService
 
 public function index()
 {
-  return   $user = user::latest()->paginate(3);
+  return   $user = user::with('roles')->paginate(3);
 
 }
 
  public function store(StoreuserRequest $request)
     {
-      user::create($request->validated());
+      $user =  user::create($request->validated());
+      $user->assignRole($request->role);
       
       }
       
@@ -26,6 +27,7 @@ public function index()
     {
           
           $user->update($request->validated());
+          $user->assignRole($request->role);
        
     
     }

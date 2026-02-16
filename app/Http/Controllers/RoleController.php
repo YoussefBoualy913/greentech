@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreroleRequest;
 use App\service\RoleService;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
@@ -16,7 +17,6 @@ class RoleController extends Controller
     public function index(RoleService $service)
     {  
         $data = $service->index();
-        //  dd($data['permissions']);
         return view('roles.roles',$data);
         }
         
@@ -52,24 +52,34 @@ class RoleController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Role $role)
-    {
-        
+    {    
+        $roles = Role::all();
+        $permissions = Permission::all();
+        $data = [
+            'roles' => $roles,
+            'role' => $role,
+            'permissions' => $permissions,
+            'route'   => route('roles.update',$role),
+            'method'  => 'PUT',
+        ];
+         return view('roles.roles',$data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,RoleService $service , Role $role)
+    public function update(StoreroleRequest $request,RoleService $service , Role $role)
     {
          $service->update($request, $role);
          return redirect()->route('roles.index');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Role $role,RoleService $service)
-    {
-       $service->delete($role);
+         }
+         
+         /**
+          * Remove the specified resource from storage.
+         */
+        public function destroy(Role $role,RoleService $service)
+        {
+            $service->delete($role);
+            return redirect()->route('roles.index');
     }
 }

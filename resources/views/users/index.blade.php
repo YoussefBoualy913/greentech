@@ -155,23 +155,29 @@
                             <td class="px-6 py-4">
                                 <span
                                 @if ($user->role  === "admin")
-                                    
-                                class="bg-purple-100 text-purple-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-purple-200">{{$user->role}}
+                                    @foreach ($user->roles as $role)
+                                        
+                                    class="bg-purple-100 text-purple-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-purple-200">{{$role->name}}
+                                    @endforeach
                                 @endif
                                 @if ($user->role  === "client")
                                     
-                                class="bg-purple-100  text-blue-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-purple-200">{{$user->role}}
+                                class="bg-purple-100  text-blue-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-purple-200">{{$user->role->name}}
                                 @endif
                                  @if ($user->role  === "Éditeur")
                                     
-                                class="bg-purple-100 hover:text-red-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-purple-200">{{$user->role}}
+                                class="bg-purple-100 hover:text-red-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-purple-200">{{$user->role->name}}
                                 @endif
                                 </span>
                             </td>
                            
                             <td class="px-6 py-4 text-right space-x-2">
-                                <a href="#" class="text-brand-600 hover:text-brand-800 font-medium text-sm">Éditer</a>
-                                <button class="text-red-500 hover:text-red-700 font-medium text-sm">Supprimer</button>
+                                <a href="{{ route('users.edit',$user) }}" class="text-brand-600 hover:text-brand-800 font-medium text-sm">Éditer</a>
+                                <form action="{{ route('users.destroy',$user) }}" method="POST">
+                                            @method('delete')
+                                            @csrf
+                                <button type = 'submit' class="text-red-500 hover:text-red-700 font-medium text-sm">Supprimer</button>
+                                </form>
                             </td>
                         </tr>
                      @endforeach
@@ -239,12 +245,22 @@
                     </tbody>
                 </table>
                 <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between">
-                    <span class="text-sm text-slate-500">Affichage de 1 à 3 sur 12 utilisateurs</span>
+                    <span class="text-sm text-slate-500">Affichage de {{ $users->currentPage() }} sur {{ $users->lastPage() }} page </span>
+                      <span class="text-sm text-slate-500">Total  {{ $users->total() }} users</span>
                     <div class="flex gap-1">
-                        <button class="px-3 py-1 border border-gray-200 rounded text-sm disabled:opacity-50"
+                        @if ($users->onFirstPage())
+                        <button  class="px-3 py-1 border border-gray-200 rounded text-sm disabled:opacity-50"
                             disabled>Précédent</button>
-                        <button
-                            class="px-3 py-1 border border-gray-200 rounded text-sm hover:bg-gray-50">Suivant</button>
+                        @else
+                         <a href="{{ $users->previousPageUrl() }}" class="px-3 py-1 border border-gray-200 rounded text-sm "
+                            >Précédent</a>
+                        @endif
+                        @if($users->hasMorePages())
+                        <a href="{{ $users->nextPageUrl() }}" class="px-3 py-1 border border-gray-200 rounded text-sm hover:bg-gray-50">Suivant</a>
+                        @else
+                        <button  class="px-3 py-1 border border-gray-200 rounded text-sm disabled:opacity-50"
+                            disabled>Suivant</button>
+                        @endif
                     </div>
                 </div>
             </div>
