@@ -154,20 +154,12 @@
                             <td class="px-6 py-4 text-slate-600 font-medium">{{$user->email}}</td>
                             <td class="px-6 py-4">
                                 <span
-                                @if ($user->role  === "admin")
-                                    @foreach ($user->roles as $role)
-                                        
-                                    class="bg-purple-100 text-purple-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-purple-200">{{$role->name}}
+                                class="bg-purple-100 hover:text-red-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-purple-200">
+                               
+                                    @foreach ($user->roles as $role) 
+                                    {{$role->name}}
+                                   
                                     @endforeach
-                                @endif
-                                @if ($user->role  === "client")
-                                    
-                                class="bg-purple-100  text-blue-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-purple-200">{{$user->role->name}}
-                                @endif
-                                 @if ($user->role  === "Éditeur")
-                                    
-                                class="bg-purple-100 hover:text-red-700 text-xs font-semibold px-2.5 py-0.5 rounded border border-purple-200">{{$user->role->name}}
-                                @endif
                                 </span>
                             </td>
                            

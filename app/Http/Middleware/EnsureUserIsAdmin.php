@@ -21,10 +21,10 @@ class EnsureUserIsAdmin
          return redirect()->route('home');
         }
 
-         if(Auth::user()->role !=="admin")
+         if(Auth::user()->hasRole('admin'))
         {
-            abort(403);
+            return $next($request);
         }
-        return $next($request);
+            abort(403);
     }
 }

@@ -33,6 +33,7 @@
                 </svg>
                 Dashboard
             </a>
+            @role('admin|Gestionnaire')
             <a href="{{ route('products.create') }}" class="flex items-center px-4 py-2 text-slate-400 rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                 stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-3">
@@ -42,6 +43,8 @@
 
                 Produits
             </a>
+            @endrole
+            @role('admin')
               <a href="{{ route('users.index') }}" class="flex items-center px-4 py-2 text-slate-400 rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-5 h-5 mr-3">
@@ -58,6 +61,7 @@
                 </svg>
                 Rôles
             </a>
+            @endrole
             <a href="{{ route('home') }}"
                 class="flex items-center px-4 py-2 text-slate-400 rounded-lg hover:bg-slate-800 hover:text-white transition-colors">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -113,6 +117,10 @@
                             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                 </div>
+                <a href="{{ route('products.export') }}" class="bg-brand-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brand-700 transition-colors flex items-center gap-2">
+                   Exporter en Excel
+                </a>
+                @can('create',App\Models\Product::class)
                 <a href="{{ route('products.create')}}"
                     class="bg-brand-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brand-700 transition-colors flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
@@ -121,6 +129,7 @@
                     </svg>
                     Nouveau Produit
                 </a>
+                 @endcan
             </div>
 
             <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
@@ -157,13 +166,19 @@
                                 <span class="text-slate-600">{{$product->stock}}</span>
                             </td>
                             <td class="px-6 py-4 text-right flex space-x-2">
+                                @can('update',$product)
+                                    
                                 <a href="{{route('products.edit',$product->id)}}"
-                                class="text-amber-700 hover:text-brand-800 font-medium text-sm">Éditer</a>
+                                    class="text-amber-700 hover:text-brand-800 font-medium text-sm">Éditer</a>
+                                @endcan
+                                @can('delete',$product)
                                 <form action="{{route('products.destroy',$product->id)}}" method="POST"  onsubmit="return confirm('Supprimer ce produit ?')">
-                                @method('DELETE')
-                                @csrf
-                                <button type="submit" class="text-red-500 hover:text-red-700 font-medium text-sm">Supprimer</button>
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type="submit" class="text-red-500 hover:text-red-700 font-medium text-sm">Supprimer</button>
                                 </form>
+                                @endcan
+
                             </td>
                         </tr>
                         @endforeach

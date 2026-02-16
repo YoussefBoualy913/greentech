@@ -28,6 +28,7 @@ class UserController extends Controller
         */
         public function create()
         {   
+
             $roles = Role::all();
             $data = [
                 'user' => null,

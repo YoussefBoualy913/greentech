@@ -28,9 +28,12 @@ Route::prefix('/auth')->group(function(){
 });
 
 //admin
+Route::middleware(EnsureUserIsAdmin::class)->group(function(){
+    Route::resource('users', UserController::class);
+    Route::resource('roles', RoleController::class);
+    });
 Route::resource('products', ProductController::class)->only(['index','create','store','edit','update','destroy']);
-Route::resource('users', UserController::class);
-Route::resource('roles', RoleController::class);
+Route::get('products/export', [ProductController::class, 'export'])->name('products.export');
 
 //Client
 Route::prefix('/client')->middleware(EnsureUserIsClient::class)->controller(ClientContreller::class)->group(function(){
